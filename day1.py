@@ -7,7 +7,7 @@ def replace_words(line):
     number = ''
     new_line = ''
     for char in line:
-        if char in ['0','1','2','3','4','5','6','7','8','9']:
+        if ord('1') <= ord(char) <= ord('9') :
             number += char
         new_line += char
         if 'one' in new_line[-3::]:
@@ -35,27 +35,29 @@ def parse_line(line, find_words = False) -> int:
     Recieves a line of text
     Return an int formed by the first digit in the string and the last digit in the string
     """
-    first = None
-    last = None
     line = line.strip()
-    original = line
 
     if find_words:
         line = replace_words(line)
 
+    res = ''
     for char in line:
-        if(char in ['0','1','2','3','4','5','6','7','8','9']):
-            if first is None:
-                first = char
-                last = char
-            else:
-                last = char
-    print(f"{original} -> {line}: {first+last}")
-    return int(first+last)
+        if ord('1') <= ord(char) <= ord('9') :
+            res = char
+            break
+    for char in line[::-1]:
+        if ord('1') <= ord(char) <= ord('9') :
+            res += char
+            break
+    #print(f"{line} -> {res}")
+    return int(res)
 
 if __name__ == '__main__':
-    value = 0
+    chal1 = 0
+    chal2 = 0
     with open('day1.input', 'r') as f:
         for line in f.readlines():
-            value += parse_line(line, True)
-    print(value)
+            chal1 += parse_line(line, False)
+            chal2 += parse_line(line, True)
+    print(f"Challenge 1: {chal1}")
+    print(f"Challenge 2: {chal2}")
