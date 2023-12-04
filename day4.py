@@ -5,31 +5,17 @@ class Card:
         self.line = line
         tmp = line.strip().split(':')
         self.id = int(tmp[0][5::])
-        winning = tmp[1].split('|')[0].split(' ')
-        current = tmp[1].split('|')[1].split(' ')
-        self.winning = []
-        for k in range(len(winning)):
-            if winning[k] != '':
-                self.winning.append(winning[k])
-        self.current = []
-        for k in range(len(current)):
-            if current[k] != '':
-                self.current.append(current[k])
+        self.winning = [num for num in tmp[1].split('|')[0].split(' ') if num]
+        self.current = [num for num in tmp[1].split('|')[1].split(' ') if num]
 
     def get_matches(self):
-        winning_numbers = 0
-        for i in self.current:
-            if i in self.winning:
-                winning_numbers += 1
-        return winning_numbers
+        return sum(1 for i in self.current if i in self.winning)
 
     def get_points(self):
         winning_numbers = self.get_matches()
         if(winning_numbers == 0):
             return 0
-        else:
-            return 2**(winning_numbers-1)
-
+        return 2**(winning_numbers-1)
 
 if __name__ == '__main__':
     chal1 = 0
