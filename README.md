@@ -11,7 +11,7 @@ This repository contains my solutions to the [Advent of Code 2023](https://adven
 | [2](day2.py)   |   ⭐  |   ⭐   |
 | [3](day3.py)   |   ⭐  |   ⭐   |
 | [4](day4.py)   |   ⭐  |   ⭐   |
-| [5](day5.py)   |       |        |
+| [5](day5.py)   |   ⭐  |        |
 <!-- | [6](day6.py)   |            |             | -->
 <!-- | [7](day7.py)   |            |             | -->
 <!-- | [8](day8.py)   |            |             | -->

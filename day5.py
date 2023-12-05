@@ -12,14 +12,14 @@ class Mapper:
 
     def map(self, num):
         for arr in self.values:
-            if arr[1] <= num <= arr[1]+arr[2]:
+            if arr[1] <= num < arr[1]+arr[2]:
                 diff = num - arr[1]
                 return arr[0] + diff
         return num
 
 if __name__ == '__main__':
     chal1 = 9999999999999999999999999999999
-    chal2 = 0
+    chal2 = 9999999999999999999999999999999
     mappers_name = ['seed_to_soil', 'soil_to_fertilizer', 'fertilizer_to_water', 'water_to_light', 'light_to_temperature', 'temperature_to_humidity', 'humidity_to_location']
     mappers = {}
     seeds = []
@@ -41,19 +41,26 @@ if __name__ == '__main__':
             mappers[mapper_name] = Mapper(lines, mapper_name)
             lines = []
 
-        seed_to_location = {}
-        for seed in seeds:
+    seed_to_location = {}
+    for seed in seeds:
+        current = seed
+        for mapper_name in mappers_name:
+            current = mappers[mapper_name].map(current)
+        seed_to_location[seed] = current
+
+    for location in seed_to_location:
+        chal1 = min(chal1, seed_to_location[location])
+
+    seed_to_location = {}
+    for k in range(0, len(seeds),2):
+        for seed in range(seeds[k], seeds[k]+seeds[k+1]):
             current = seed
             for mapper_name in mappers_name:
                 current = mappers[mapper_name].map(current)
             seed_to_location[seed] = current
 
-        print(seed_to_location)
-
-        for location in seed_to_location:
-            chal1 = min(chal1, location)
-
-
+    for location in seed_to_location:
+        chal2 = min(chal2, seed_to_location[location])
 
     print(f"Challenge 1: {chal1}")
     print(f"Challenge 2: {chal2}")
