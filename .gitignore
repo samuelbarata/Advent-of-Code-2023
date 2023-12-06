@@ -161,4 +161,4 @@ cython_debug/
 
 .vscode
 day*.input*
-
+template.py
