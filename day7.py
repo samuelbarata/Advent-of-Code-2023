@@ -1,10 +1,10 @@
-
+# Description: Advent of Code - Day 7
 
 class Card:
     def __init__(self, card, joker=False):
         SCORE = {'A': 14, 'K': 13, 'Q': 12, 'J': 11, 'T': 10, '9': 9, '8': 8, '7': 7, '6': 6, '5': 5, '4':4, '3':3, '2':2}
         if joker:
-            SCORE = {'A': 14, 'K': 13, 'Q': 12, 'J': 1, 'T': 10, '9': 9, '8': 8, '7': 7, '6': 6, '5': 5, '4':4, '3':3, '2':2}
+            SCORE['J'] = 1
         self.card = card
         self.score = SCORE[card]
     def __eq__(self, other: object) -> bool:
@@ -19,7 +19,6 @@ class Card:
         return self.__str__()
     def getScore(self):
         return self.score
-
 
 class Hand:
     def __init__(self, line, jokers=False):
@@ -78,6 +77,7 @@ class Hand:
             self.analyseHand()
             return
 
+        # Get the card with the most number of cards
         max_card = None
         number_of_cards = 0
         for card in self.cards:
@@ -90,6 +90,7 @@ class Hand:
                 if(card > max_card):
                     max_card = card
 
+        # replace the jokers with that card on the original deck
         self.cards_mod = self.cards.copy()
         self.cards_mod[max_card] += self.cards[Card('J', self.jokers)]
         del(self.cards_mod[Card('J', self.jokers)])
