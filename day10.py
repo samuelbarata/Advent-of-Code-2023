@@ -109,7 +109,5 @@ if __name__ == '__main__':
         for y, line in enumerate(f):
             m.add(y, line.strip())
 
-        chal1 = m.find_path()
-
-    print(f"Challenge 1: {len(chal1)}")
+    print(f"Challenge 1: {len(m.find_path())}")
     print(f"Challenge 2: {m.find_inner_tiles()}")
