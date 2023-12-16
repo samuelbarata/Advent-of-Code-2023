@@ -42,10 +42,13 @@ class Galaxy:
         self.original_y = y
         self.expansions_x = 0
         self.expansions_y = 0
+
     def expand_vertical(self):
         self.expansions_y += 1
+
     def expand_horizontal(self):
         self.expansions_x += 1
+
     def distance(self, other, increment=1):
         return abs((self.original_x + increment*self.expansions_x) - (other.original_x + increment*other.expansions_x)) + abs((self.original_y + increment*self.expansions_y) - (other.original_y + increment*other.expansions_y))
 
