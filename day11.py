@@ -1,5 +1,4 @@
 # Description: Advent of Code - Day 11
-import copy
 
 class Universe:
     def __init__(self):
@@ -34,7 +33,7 @@ class Universe:
                 if galaxy == other:
                     continue
                 ret += galaxy.distance(other, increment)
-        return ret
+        return int(ret/2)
 
 class Galaxy:
     def __init__(self, x, y):
@@ -50,7 +49,8 @@ class Galaxy:
         self.expansions_x += 1
 
     def distance(self, other, increment=1):
-        return abs((self.original_x + increment*self.expansions_x) - (other.original_x + increment*other.expansions_x)) + abs((self.original_y + increment*self.expansions_y) - (other.original_y + increment*other.expansions_y))
+        return  abs((self.original_x + increment*self.expansions_x) - (other.original_x + increment*other.expansions_x)) +\
+                abs((self.original_y + increment*self.expansions_y) - (other.original_y + increment*other.expansions_y))
 
 if __name__ == '__main__':
     chal1 = 0
@@ -61,5 +61,5 @@ if __name__ == '__main__':
             u.add(line.strip())
     u.finish()
 
-    print(f"Challenge 1: {int(u.challenge(1)/2)}")
-    print(f"Challenge 2: {int(u.challenge(999999)/2)}")
+    print(f"Challenge 1: {u.challenge(1)}")
+    print(f"Challenge 2: {u.challenge(999999)}")
